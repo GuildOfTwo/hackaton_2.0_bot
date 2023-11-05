@@ -4,7 +4,7 @@ const HttpsProxyAgent = require('https-proxy-agent');
 
 // Общие настройки
 let config = {
-    "token": "6776594984:AAG9CpZvT1fSB5Ds3LbqWWBCY_X09-QRg88", // Токен бота
+    "token": "6847126604:AAGjcxaXM5FTPvp6VENP67hc9TO2yfDacC8", // Токен бота
     "admin": 496258527 // id владельца бота
 };
 
