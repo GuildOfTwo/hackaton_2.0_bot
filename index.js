@@ -1,16 +1,28 @@
 const { Telegraf } = require('telegraf');
+const dotenv = require('dotenv')
+const HttpsProxyAgent = require('https-proxy-agent');
 
-// const HttpsProxyAgent = require('https-proxy-agent');
 // Общие настройки
 let config = {
     "token": "6776594984:AAG9CpZvT1fSB5Ds3LbqWWBCY_X09-QRg88", // Токен бота
     "admin": 496258527 // id владельца бота
 };
-const bot = new Telegraf(config.token, {
-    // Если надо ходить через прокси - укажите: user, pass, host, port
-    // telegram: { agent: new HttpsProxyAgent('http://user:pass@host:port') }
+
+if (process.env.NODE_ENV === 'production') {
+    dotenv.config()
+    config.token = process.env.TOKEN
+    config.admin = process.env.ADMIN
 }
-);
+
+let botOptions = {};
+
+if (process.env.PROXY) {
+    botOptions.telegram = { agent: new HttpsProxyAgent(process.env.PROXY) }
+}
+
+const bot = new Telegraf(config.token, botOptions);
+
+
 let replyText = {
     "helloAdmin": "Ждем сообщения от пользователей",
     "helloUser": "Привет! Постараюсь ответить в ближайшее время",
