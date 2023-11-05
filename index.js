@@ -11,7 +11,7 @@ let config = {
 if (process.env.NODE_ENV === 'production') {
     dotenv.config()
     config.token = process.env.TOKEN
-    config.admin = process.env.ADMIN
+    config.admin = parseInt(process.env.ADMIN)
 }
 
 let botOptions = {};
